@@ -7,13 +7,13 @@ pipeline {
                 steps {
                     echo 'Building..'
                     sh 'docker build -t spring-image .'
-                    sh 'docker rm 'spring-container'
+                    sh 'docker rm spring-container'
                 }
             }
             stage('Test') {
                 steps {
                     echo 'Testing..'
-                        sh 'mvn --version'
+                    sh 'mvn --version'
 
                 }
             }
