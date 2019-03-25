@@ -37,10 +37,12 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
 post {
     always {
         sh 'echo finished...'
+
+       mail to: 'lmp004@lvc.edu',  body: 'body of email', subject: 'The pipeline has succeeded'
     }
 
     failure {
-        body: 'body of email', mail to: 'lmp004@lvc.edu', subject: 'The pipeline has failed'
+       mail to: 'lmp004@lvc.edu',  body: 'body of email', subject: 'The pipeline has failed'
     }
 
 
