@@ -40,7 +40,7 @@ post {
     }
 
     failure {
-        emailext body: 'body of email', mail to: EMAIL_RECIPIENTS, subject: 'The pipeline has failed'
+        body: 'body of email', mail to: 'lmp004@lvc.edu', subject: 'The pipeline has failed'
     }
 
 
