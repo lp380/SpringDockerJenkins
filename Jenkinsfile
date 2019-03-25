@@ -1,5 +1,12 @@
 pipeline {
-    
+
+environment {
+
+EMAIL_RECIPIENTS: "lmp004@.lvc.edu"
+
+}
+
+
     agent any
 
         stages {
@@ -27,6 +34,14 @@ pipeline {
             }
         }
 
+post {
+    always {
+        sh 'echo finished...'
+    }
+
+    failure {
+        mail to: EMAIL_RECIPIENTS, subject: 'The pipeline has failed'
+    }
 
 
 }
