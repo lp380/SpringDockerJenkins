@@ -7,7 +7,7 @@ pipeline {
                 steps {
                     echo 'Building..'
 
-                    sh(ret$rnStdout: true, script: '''#!/bin/bash
+                    sh(returnStdout: true, script: '''#!/bin/bash
                         
                        if [ ! "$(docker images | grep spring-image)" ]
                        then
