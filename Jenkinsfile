@@ -9,18 +9,16 @@ pipeline {
 
                     sh(returnStdout: true, script: '''#!/bin/bash
                         
-                       if [ ! "$(docker images | grep spring-image)" ]
+                       if [ "$(docker images | grep spring-image)" ]
                        then
+                       echo 'image name does exist'
                          # image doesn't exist 
-                         sh 'docker build -t spring-image .'
+                         #sh 'docker build -t spring-image .'
+                       else
+                        echo 'image name DOES NOT exist'
+                           
                        fi 
 
-                       if [ "$(docker ps -a | grep spring-container)" ]
-                       then
-                        # container name exists
-                        sh 'docker container rm spring-container'
-               
-                       fi 
 
                        '''.stripIndent())
 
