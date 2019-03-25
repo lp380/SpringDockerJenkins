@@ -9,7 +9,7 @@ pipeline {
 
                     sh(returnStdout: true, script: '''#!/bin/bash
                         
-                       if [ "$(docker images | grep spring-image)" ]
+                       if [ "$(docker images | grep spring-image)" ];
                        then
                        echo 'image name does exist'
                          # image doesn't exist 
