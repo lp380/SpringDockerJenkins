@@ -6,8 +6,24 @@ pipeline {
             stage('Build') {
                 steps {
                     echo 'Building..'
-                    sh 'docker build -t spring-image .'
-                    sh 'docker run -i --name spring-container spring-image'
+
+                    sh(ret$rnStdout: true, script: '''#!/bin/bash
+                        
+                       if [ ! "$(docker images | grep spring-image)" ]
+                       then
+                         # image doesn't exist 
+                         sh 'docker build -t spring-image .'
+                       fi 
+
+                       if [ "$(docker ps -a | grep spring-container)" ]
+                       then
+                        # container name exists
+                        sh 'docker rm spring-container'
+               
+                       fi 
+
+                       '''.stripIndent())
+
                 }
             }
             stage('Test') {
@@ -22,9 +38,10 @@ pipeline {
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
+                        sh 'docker run -i --name spring-container spring-image'
                 }
             }
-        }
+       }
 
 
 
