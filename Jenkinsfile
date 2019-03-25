@@ -8,7 +8,9 @@ pipeline {
                     echo 'Building..'
 
                     sh(returnStdout: true, script: '''#!/bin/bash
-                        
+                       
+                       $(docker images | grep 'spring-image')
+
                        if [ "$(docker images | grep spring-image)" ];
                        then
                        echo 'image name does exist'
