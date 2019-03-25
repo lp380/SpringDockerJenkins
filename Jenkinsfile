@@ -2,7 +2,7 @@ pipeline {
 
 environment {
 
-EMAIL_RECIPIENTS: "lmp004@.lvc.edu"
+EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
 
 }
 
