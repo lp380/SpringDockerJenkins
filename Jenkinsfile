@@ -14,7 +14,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
                 steps {
                     echo 'Building..'
                     sh 'docker build -t spring-image .'
-                    sh 'docker rm spring-container'
+                 
                 }
             }
             stage('Test') {
