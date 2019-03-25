@@ -18,7 +18,7 @@ pipeline {
                        if [ "$(docker ps -a | grep spring-container)" ]
                        then
                         # container name exists
-                        sh 'docker rm spring-container'
+                        sh 'docker container rm spring-container'
                
                        fi 
 
