@@ -20,7 +20,10 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
             stage('Test') {
                 steps {
                     echo 'Testing..'
-                    junit '/var/www/java/target/surefire-reports/TEST-ma.SpringTest.xml'                 
+                    sh 'docker create --name temporary-container spring-image'
+                    sh 'docker cp temporary-container:/var/www/java/target/surefire-reports .'
+                    sh 'docker rm temporary-container'
+                    junit 'surefire-reports/TEST-ma.SpringTest.xml'                 
                 }
             }
 
