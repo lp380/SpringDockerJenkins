@@ -20,7 +20,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
             stage('Test') {
                 steps {
                     echo 'Testing..'
-                  
+                    junit 'target/surefire-reports/*.xml'                  
 
                 }
             }
