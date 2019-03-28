@@ -24,7 +24,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
                     sh 'docker cp temporary-container:/var/www/java/target/surefire-reports .'
                     sh 'docker rm temporary-container'
                     sh 'ls surefire-reports'
-                    junit 'surefire-reports/TEST-ma.SpringTest.xml'                 
+                    junit 'surefire-reports/*.xml'                 
                 }
             }
 
