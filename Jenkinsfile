@@ -20,7 +20,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
             stage('Test') {
                 steps {
                     echo 'Testing..'
-                    cat '/var/www/java/target/surefire-reports/TEST-ma.SpringTest.xml'                 
+                    junit '/var/www/java/target/surefire-reports/TEST-ma.SpringTest.xml'                 
                 }
             }
 
