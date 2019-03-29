@@ -32,7 +32,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
-                    sh DeleteContainer.sh
+                    sh './DeleteContainer.sh'
                     sh 'docker run -i -d --name spring-container spring-image'
                 }
             }
