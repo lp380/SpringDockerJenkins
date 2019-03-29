@@ -4,6 +4,8 @@ environment {
 
 EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
 
+CONTAINER_NAME = "spring-container"
+
 }
 
 
@@ -32,7 +34,7 @@ EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
-                    sh './DeleteContainer.sh'
+                    sh './DeleteContainer.sh {env.CONTAINER_NAME}'
                     sh 'docker run -i -d --name spring-container spring-image'
                 }
             }
