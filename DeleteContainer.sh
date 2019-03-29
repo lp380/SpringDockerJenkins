@@ -7,6 +7,8 @@ containers=$(docker ps -a)
 echo $containers
 FileToFind=$1
 
+echo "LOOKING FOR CONTAINERS WITH NAME $FileToFind"
+
 echo "$(docker ps -q -f name="$FileToFind")"
 
 if [ "$(docker ps -a -q -f name=$FileToFind)" ]; then
