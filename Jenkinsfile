@@ -34,6 +34,7 @@ CONTAINER_NAME = "spring-container"
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
+                    echo '${env.CONTAINER_NAME}'
                     sh './DeleteContainer.sh ${env.CONTAINER_NAME}'
                     sh 'docker run -i -d --name spring-container spring-image'
                 }
