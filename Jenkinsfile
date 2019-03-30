@@ -35,7 +35,7 @@ CONTAINER_NAME = "spring-container"
                 steps {
                     echo 'Deploying....'
                     echo '${env.CONTAINER_NAME}'
-                    sh 'bash -c ./DeleteContainer.sh ${env.CONTAINER_NAME}'
+                    sh '/DeleteContainer.sh ${env.CONTAINER_NAME}'
                     sh 'docker run -i -d --name spring-container spring-image'
                 }
             }
