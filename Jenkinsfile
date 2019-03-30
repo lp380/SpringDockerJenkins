@@ -2,8 +2,6 @@ pipeline {
 
 environment {
 
-EMAIL_RECIPIENTS = "lmp004@.lvc.edu"
-
 CONTAINER_NAME = "spring-container"
 
 }
@@ -14,6 +12,8 @@ CONTAINER_NAME = "spring-container"
         stages {
             stage('Build') {
                 steps {
+                    echo "printing variables"
+                    sh 'env'
                     echo 'Building..'
                     sh 'docker build -t spring-image .'
                  
@@ -35,7 +35,7 @@ CONTAINER_NAME = "spring-container"
                 steps {
                     echo 'Deploying....'
                     echo '${env.CONTAINER_NAME}'
-                    sh '/DeleteContainer.sh ${env.CONTAINER_NAME}'
+                    sh './DeleteContainer.sh ${env.CONTAINER_NAME}'
                     sh 'docker run -i -d --name spring-container spring-image'
                 }
             }
