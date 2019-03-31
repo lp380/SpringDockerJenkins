@@ -10,7 +10,7 @@ CONTAINER_NAME = "spring-container"
     agent any
     
     parameters {
-        string(name: 'FILENAME', defaultValue: 'spring-container', description: 'Name of the container'
+        string(name: 'FILENAME', defaultValue: 'spring-container', description: 'Name of the container')
 
     }
 
