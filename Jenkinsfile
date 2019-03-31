@@ -1,44 +1,40 @@
 pipeline {
 
-environment {
-
-CONTAINER_NAME = "spring-container"
-
-}
 
 
     agent any
     
     parameters {
-        string(name: 'FILENAME', defaultValue: 'spring-container', description: 'Name of the container')
+        string(name: 'USER_CONTAINER_NAME', defaultValue: 'spring-container', description: 'Name of the container')
 
     }
 
 
+    environment {
 
+        CONTAINER_NAME = ${params.USER_CONTAINER_NAME}
+    }
 
         stages {
 
-
-stage('Example') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+            stage('ExampleStage') {
+                input {
+                    message "Should we continue?"
+                    ok "Submit"
+                    submitter "user1,user2"
+                    parameters {
+                        string(name: 'CONTINUE_INPUT', defaultValue: 'We probably should', description: 'Should we continue?')
+                    }
+                }
+                steps {
+                echo "Answer from user: ${CONTINUE_INPUT}"
                 }
             }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
-        }
 
 
             stage('Build') {
                 steps {
-                    echo "printing variables"
-                    echo "User input ${params.FILENAME}"
+                    echo "printing variables" 
                     sh 'env'
                     echo 'Building..'
                     sh 'docker build -t spring-image .'
