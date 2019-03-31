@@ -21,6 +21,6 @@ public class SpringTest {
     public void testService2() {
         int a = 1;
         int b = 2;
-        org.junit.Assert.assertTrue(a + b == 4);
+        org.junit.Assert.assertTrue(a + b == 3);
     }
 }
