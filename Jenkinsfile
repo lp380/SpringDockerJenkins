@@ -45,12 +45,17 @@ post {
     always {
         sh 'echo finished...'
 
-       mail to: 'lmp004@lvc.edu',  body: 'body of email', subject: 'The pipeline has succeeded'
+            emailext body: 'The pipeline has succeeded', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+
     }
 
     failure {
-       mail to: 'lmp004@lvc.edu',  body: 'body of email', subject: 'The pipeline has failed'
-    }
+
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+
+
+
+   }
 
 
 }
