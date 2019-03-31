@@ -12,7 +12,7 @@ pipeline {
 
     environment {
 
-        CONTAINER_NAME = ${params.USER_CONTAINER_NAME}
+        CONTAINER_NAME = "${params.USER_CONTAINER_NAME}"
     }
 
         stages {
