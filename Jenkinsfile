@@ -8,11 +8,17 @@ CONTAINER_NAME = "spring-container"
 
 
     agent any
+    
+    parameters {
+        string(name: 'FILENAME', defaultValue: 'spring-container', description: 'Name of the container'
+
+    }
 
         stages {
             stage('Build') {
                 steps {
                     echo "printing variables"
+                    echo "User input ${params.FILENAME}"
                     sh 'env'
                     echo 'Building..'
                     sh 'docker build -t spring-image .'
