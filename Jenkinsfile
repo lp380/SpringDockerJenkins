@@ -24,7 +24,7 @@ pipeline {
                     }
                 }
                 steps {
-                echo "Answer from user: ${CONTINUE_INPUT}"
+                    echo "Answer from user: ${CONTINUE_INPUT}"
                 }
             }
 
@@ -62,27 +62,26 @@ pipeline {
 
             post {
                 always {
-                sh 'echo finished...'
+                    sh 'echo finished...'
 
              }    
 
-            success {
-                echo "SUCCESS: This will only print if the status is blue or green"
+                success {
+                    echo "SUCCESS: This will only print if the status is blue or green"
 
-                emailext body: 'The pipeline has succeeded', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD SUCCESS'
+                    emailext body: 'The pipeline has succeeded', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD SUCCESS'
  
-            }
+                }
 
-            unstable {
-                echo "UNSTABLE: this will print if there are any test failures, code violations, etc."
-            }
+                unstable {
+                    echo "UNSTABLE: this will print if there are any test failures, code violations, etc."
+                }
 
-            failure {
+                failure {
 
-                emailext body: 'The build failed.  Thanks Obama.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD FAILURE ):'
+                    emailext body: 'The build failed.  Thanks Obama.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD FAILURE ):'
 
-            }
-
+                }
     }
 
 }
