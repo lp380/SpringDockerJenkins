@@ -1,14 +1,11 @@
 pipeline {
 
-
-
     agent any
     
     parameters {
         string(name: 'USER_CONTAINER_NAME', defaultValue: 'spring-container', description: 'Name of the container')
 
     }
-
 
     environment {
 
@@ -63,23 +60,29 @@ pipeline {
             }
         }
 
-post {
-    always {
-        sh 'echo finished...'
+            post {
+                always {
+                sh 'echo finished...'
 
-            emailext body: 'The pipeline has succeeded', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+             }    
+
+            success {
+                echo "SUCCESS: This will only print if the status is blue or green"
+
+                emailext body: 'The pipeline has succeeded', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD SUCCESS'
+ 
+            }
+
+            unstable {
+                echo "UNSTABLE: this will print if there are any test failures, code violations, etc."
+            }
+
+            failure {
+
+                emailext body: 'The build failed.  Thanks Obama.', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'BUILD FAILURE ):'
+
+            }
 
     }
-
-    failure {
-
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-
-
-
-   }
-
-
-}
 
 }
