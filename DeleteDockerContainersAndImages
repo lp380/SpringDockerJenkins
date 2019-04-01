@@ -1,0 +1,49 @@
+# Used to delete images
+
+function deleteSpecificImages {
+    echo "enter all images you DON'T want to delete"
+    read -a nodelete
+    command="docker images -a | grep -v"
+    for i in "${nodelete[@]}"
+        do
+            command+=" -e $i"
+        done
+    command+=" | awk 'NR>1 {print $1}'"
+echo "$command"
+#eval $command
+}
+
+
+docker images -a
+
+#have loop so that if user puts in anything except exactly Y or N, asks for user input again
+
+echo "Do you want to delete ALL images? (Y/N)"
+read yesno
+
+if [ $yesno = "Y" ]
+then
+    echo "Deleting all images"
+    cmd="docker rmi $(docker images -a -q)"
+    echo $cmd
+    #eval $cmd
+else
+    echo "Do you want to delete ALL images with <none>? (Y/N)"
+    read yesno
+    if [ $yesno = "Y" ] 
+    then
+         cmd="docker images -a --filter "dangling=true" | grep -e \"<none>\" | awk 'NR>1 {print }'"
+         # echo -e $cmd 
+         #eval $cmd
+         echo "docker rmi \$($cmd)"
+         eval "docker rmi \$($cmd)"
+    elif [ $yesno = "N" ]
+    then 
+        echo "Calling function.."
+        deleteSpecificImages
+    else
+        echo "inproper input"
+    fi
+fi
+
+

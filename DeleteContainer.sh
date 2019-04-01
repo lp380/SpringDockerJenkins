@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Used in Jenkinsfile
+
 # does not need .sh extention
 
 # Delete container if it is running
