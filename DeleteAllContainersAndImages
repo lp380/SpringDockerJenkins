@@ -1,0 +1,42 @@
+# http://matt.might.net/articles/bash-by-example/
+
+# have to make it executiable - chmod +x script_name
+
+#!/bin/bash
+
+docker stop $(docker ps -q)
+echo -n "do you want to delete any containers? (Y/N)"
+read deletecontainers
+if [$deletecontainers == "Y"]
+then
+    docker ps -a
+    echo -n "What containers do you NOT want to delete?"
+    read nodelete
+
+
+echo -n "What containers do you NOT want to delete?"
+read nodelete
+docker rm $(docker ps -a | grep -v $nodelete | awk 'NR>1 {print $1}')
+docker rmi $(docker images -q)
+
+echo -n "do you want to delete any images (Y/N)"
+read deleteimages
+
+if [[ $deleteimages = "Y" ]]
+then
+    docker images -a
+    echo -n "What images do you NOT want to delete"?
+    read nodeleteimage
+    docker rmi $(docker images -a | grep -v $nodeleteimage | awk 'NR>1 {print $1}')
+else
+    echo "will not delete any images"
+fi
+
+
+if [ ! "$(docker ps -q -f name=spring-container)" ]; then
+    echo "docker with name DOES NOT exists" 
+elif [  "$(docker ps -q -f name=spring-container)" ]; then
+    echo "container with name exists"
+else
+    echo "whoa"
+fi
